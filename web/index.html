@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM Addition</title>
+    <script type="module">
+        import init, { add } from './pkg/web.js';
+
+        async function run() {
+            // Initialize the WASM module
+            await init();
+
+            const num1Input = document.getElementById('num1');
+            const num2Input = document.getElementById('num2');
+            const resultDiv = document.getElementById('result');
+            const addButton = document.getElementById('add-button');
+
+            addButton.addEventListener('click', () => {
+                const num1 = parseInt(num1Input.value, 10);
+                const num2 = parseInt(num2Input.value, 10);
+                const result = add(num1, num2);
+                resultDiv.textContent = `Result: ${result}`;
+            });
+        }
+
+        run();
+    </script>
+</head>
+<body>
+    <h1>WASM Addition</h1>
+    <input id="num1" type="number" placeholder="Enter first number">
+    <input id="num2" type="number" placeholder="Enter second number">
+    <button id="add-button">Add</button>
+    <div id="result"></div>
+</body>
+</html>
